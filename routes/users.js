@@ -26,9 +26,11 @@ router.post('/login',(req,res,next)=>{
         if(err) 
         { res.json(err);}
         else {
+            let sent=false;
             result.forEach(element => {
                 bcrypt.compare(req.body.password, element.password, function(err, response) {
-                    if(res) {
+                    if(response) {
+                        sent =true;
                         res.json(element);
                     } else {
                         
@@ -37,6 +39,9 @@ router.post('/login',(req,res,next)=>{
                   });
                 
             });
+            if(!sent){
+             res.json("login failed");
+            }
         }
     })
    

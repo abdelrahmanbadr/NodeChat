@@ -18,7 +18,7 @@ module.exports = (io, http) => {
       //   io.emit('unseenMessage', {  text: message,senderId: senderId, receiverId: receiverId, userName: userName, created_at: new Date() });
       // });
   
-      socket.on('saveUserData', (userName,userId) => {
+      socket.on('saveUserData', (userName,userId,avatar) => {
         
         // io.emit('saveUserData', { userName: userName ,userId: userId});
         let flag = false;
@@ -27,7 +27,7 @@ module.exports = (io, http) => {
             flag = true;
         });
 
-        if (!flag) clients.push({ userName: userName ,userId: userId});
+        if (!flag) clients.push({ userName: userName ,userId: userId,avatar:avatar});
         io.emit('users', {  users: clients });
       });
   
