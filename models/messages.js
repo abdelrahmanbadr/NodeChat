@@ -12,11 +12,11 @@ return db.query("Select * from"+tableName + "where (senderId = "+userId1+
 },
 
  getLastMessages:function(receiverId,callback){
- return db.query("SELECT * FROM"+tableName+"WHERE `receiverId` = "
+ return db.query("SELECT MAX(id),text,senderId,created_at FROM"+tableName+"WHERE `receiverId` = "
  + receiverId +" GROUP by (senderId)",callback);
  },
  getLastMessage:function(receiverId,senderId,callback){
- return db.query("SELECT * FROM"+tableName+"WHERE `receiverId` = "+ receiverId 
+ return db.query("SELECT MAX(id),text,senderId,created_at FROM"+tableName+"WHERE `receiverId` = "+ receiverId 
  +" AND senderId = "+senderId
  +" GROUP by (senderId)",callback);
  },
