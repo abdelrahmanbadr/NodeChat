@@ -7,7 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var  http = require('http').Server(app);
-
+var io = require('socket.io')(http);
+var socket = require('./chat')(io, http);
 var port = process.env.PORT || 3000;
 
 
