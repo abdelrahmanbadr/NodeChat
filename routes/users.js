@@ -20,6 +20,27 @@ router.post('/',(req,res,next)=>{
         })
     });
 });
+router.post('/login',(req,res,next)=>{
+    
+    users.login((req.body),(err,result)=>{
+        if(err) 
+        { res.json(err);}
+        else {
+            result.forEach(element => {
+                bcrypt.compare(req.body.password, element.password, function(err, response) {
+                    if(res) {
+                        res.json(element);
+                    } else {
+                        
+                     // Passwords don't match
+                    } 
+                  });
+                
+            });
+        }
+    })
+   
+});
 
 
 
