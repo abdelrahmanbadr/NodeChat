@@ -6,11 +6,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
+var users = require('./routes/users');
+var messages = require('./routes/messages');
 var  http = require('http').Server(app);
 var io = require('socket.io')(http);
 var socket = require('./chat')(io, http);
 var port = process.env.PORT || 3000;
-
 
 
 
@@ -32,7 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-
+app.use('/users', users);
+app.use('/messages', messages);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
