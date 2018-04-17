@@ -3,8 +3,10 @@ var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '',
-    database : 'chat'
+    database : 'chat1'
   });
-  connection.connect();
-
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
   module.exports = connection;
